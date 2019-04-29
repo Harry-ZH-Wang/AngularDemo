@@ -1,0 +1,32 @@
+<!-- Angular demo 模板类 -->
+<!--{{}}是angular的数据绑定取值，这里getUser()是自己写的函数-->
+<h3 class="bg-primary p-a-1">{{getName()}}的测试列表</h3>
+<div class="m-t-1 m-b-1">
+  <!-- #textValue为取值的 -->
+  <input class="form-control" #textValue />
+  <button class="btn btn-primary m-t-1" (click)="addInfo(textValue.value)">Add</button>
+</div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <td>No</td>
+      <td>标题</td>
+      <td>描述</td>
+      <td>操作</td>
+    </tr>
+  </thead>
+  <tbody>
+    <!--nfFor ngSwitch 为Angular的内置结构指令，*不能省略，index为数组的索引，0开始-->
+    <tr *ngFor="let item of getItems(); let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{item.action}}</td>
+      <td [ngSwitch] = "item.done">
+        <span *ngSwitchCase="true">已办</span>
+        <span *ngSwitchCase="false">代办</span>
+      </td>
+      <td>
+        <input type="checkbox" [(ngModel)] = "item.done" />
+      </td>
+    </tr>
+  </tbody>
+</table>
